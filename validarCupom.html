@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+  </script>
+  <script>
+    function sendDataToServer (){
+        const cupom = document.getElementById("cupomId").value;
+        const email = document.getElementById("emailId").value; 
+        
+        document.getElementById("cupomId").value = " ";
+        document.getElementById("emailId").value = " "; 
+        
+         google.script.run
+          .withSuccessHandler(_ => console.log('enviado'))
+          .withFailureHandler(error => console.error(error))
+          .changeStatusToUsedVoucher(cupom, email);
+        
+        
+      }
+  </script>
+</head>
+
+<body class="bg-light text-dark">
+  <div class="container text-center">
+    <h1>Verificação de Cupons</h1>
+    <img src="https://uploaddeimagens.com.br/images/003/868/163/original/adossika.png?1652569725" height="350px">
+    <div id="validaCupom" class="card border-dark mt-3">
+      <div class="mb-3 card-body text-dark">
+        <label for="cupom" class="fs-4">Cupom: </label>
+        <input type="text" class="form-control" name="cupom" id="cupomId">
+      </div>
+      <div class="card-body text-dark">
+        <label for="email" class=" fs-4">E-mail</label>
+        <input type="email" class="form-control" name="email" id="emailId">
+      </div>
+      <div class="card-body text-danger fs-6">
+        <span>Verifique a resposta no e-mail</span>
+      </div>
+      <button name="enviar" class="btn btn-primary mt-2 fs-2" onclick="sendDataToServer()">Enviar</button>
+
+    </div>
+  </div>
+</body>
+
+</html>
