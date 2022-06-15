@@ -15,18 +15,19 @@ function enviaCartaoAniversario() {
 
     diaMesAniversario = getDiaMesAniversario(values[row][4])
 
-    if ( aniversario(diaMesAniversario[0], diaMesAniversario[1])) {
+    if ( !aniversario(diaMesAniversario[0], diaMesAniversario[1])) {
       var file = files.getFileById(values[row][18]); // OBTEM O ARQUIVO PDF
 
       mailApp.sendEmail
         ({
-          to: values[row][1],
+          //to: values[row][1], //Contruindo cenário para edição e validação do htmlBody, envio e-mail para o usuário
+          to: 'autom.adossikacakes@gmail.com',
           subject: "Feliz Aniversário",
           htmlBody: "Bom dia, <br><br> Hoje é um dia mais do que especial. Nós da Adossika Cakes agradecemos sua atenção e lhe desejamos um feliz aniversário! Que você aproveite este dia tão especial <br><br>Atenciosamente,<br><br><i>Adossika Cakes</i>",
           attachments: [file.getAs(MimeType.PDF)],
         });
 
-    }
+    }break;
   }
 }
 
